@@ -1,0 +1,67 @@
+html {
+    cursor: url('./auto.cur'), auto;
+}
+
+.cursor-ns-resize {
+    cursor: url('./ns_resize.cur'), ns-resize;
+}
+
+.cursor-ew-resize {
+    cursor: url('./ew_resize.cur'), ew-resize;
+}
+
+.cursor-nw-resize {
+    cursor: url('./nw_resize.cur'), nw-resize;
+}
+
+.cursor-ne-resize {
+    cursor: url('./ne_resize.cur'), ne-resize;
+}
+
+.cursor-pointer {
+    cursor: url('./pointer.cur'), pointer;
+}
+
+.cursor-move {
+    cursor: url('./move.cur'), move;
+}
+
+.cursor-grab {
+    cursor: url('./grab.cur'), grab;
+}
+
+.cursor-grabbing {
+    cursor: url('./grabbing.cur'), grabbing;
+}
+
+.cursor-text {
+    cursor: url('./text.cur'), text;
+}
+
+.cursor-crosshair {
+    cursor: url('./crosshair.cur'), crosshair;
+}
+
+.cursor-not-allowed {
+    cursor: url('./not_allowed.cur'), text;
+}
+
+.cursor-zoom-in {
+    cursor: url('./zoom_in.cur'), zoom-in;
+}
+
+.cursor-zoom-out {
+    cursor: url('./zoom_out.cur'), zoom-out;
+}
+
+.cursor-help {
+    cursor: url('./help.cur'), help;
+}
+
+.cursor-writing {
+    cursor: url('./writing.cur'), auto;
+}
+
+.cursor-alter {
+    cursor: url('./alter.cur'), auto;
+}

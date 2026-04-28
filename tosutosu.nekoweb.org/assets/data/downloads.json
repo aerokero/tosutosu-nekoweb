@@ -1,0 +1,27 @@
+[
+  {
+    "id": "minecraft-compromise",
+    "title": "Minecraft Compromise",
+    "thumb": "https://static.planetminecraft.com/files/resource_media/screenshot/16670565-obraz_thumb.jpg",
+    "thumbAlt": "Minecraft Compromise resource pack preview",
+    "version": "26.1 and below!",
+    "url": "https://www.planetminecraft.com/texture-pack/minecraft-compromise-4303464/",
+    "visitLabel": "Visit",
+    "visitAria": "Visit Minecraft Compromise on PlanetMinecraft",
+    "desc": "Vanilla-style resource pack that blends the modern look with a touch of classic Minecraft: more programmer-art patterns, nostalgic UI tweaks and a mix of old/new sounds.",
+    "fine": "Updated Mar 24, 2025 • 16x • Texture/Resource pack",
+    "visible": true,
+    "referrerPolicy": "no-referrer"
+  },
+  {
+    "id": "monikai",
+    "title": "Monik.AI",
+    "url": "https://github.com/xtosutosu/monikai",
+    "thumb":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm0dS0arT2O5DpAJ9NgE-1D1lQx3BIHfAn9w&s",
+    "visitLabel": "GitHub",
+    "visitAria": "Open Monik.AI on GitHub",
+    "desc": "Hi. I'm MonikAI. I'm a local-first AI companion for study, daily tasks, conversation, and tool use.",
+    "fine": "GitHub repository",
+    "visible": true
+  }
+]
