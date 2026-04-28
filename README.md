@@ -1,6 +1,6 @@
-# tosutosu.jump
+# tosutosu.nekoweb.org
 
-A personal website created with love for retro web design. 🎨
+My personal hobby website 🎨
 
 ## About the Project
 
