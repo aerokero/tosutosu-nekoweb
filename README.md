@@ -1,95 +1,95 @@
 # tosutosu.jump
 
-Osobista strona internetowa stworzona z miłością do retro webdesignu. 🎨
+A personal website created with love for retro web design. 🎨
 
-## O projekcie
+## About the Project
 
-To jest moja osobista witryna internetowa hostowana na Nekoweb, pełna nostalgii i unikalnego stylu. Zawiera galeię, recenzje, świątynie (shrines), muzykę i wiele innych interaktywnych elementów.
+This is my personal website hosted on Nekoweb, full of nostalgia and unique style. It features a gallery, reviews, shrines, music, and many other interactive elements.
 
-## Struktura projektu
+## Project Structure
 
 ```
 tosutosu.nekoweb.org/
-├── index.html              # Główna strona
-├── not_found.html          # Strona błędu 404
-├── elements.css            # Style elementów
+├── index.html              # Main page
+├── not_found.html          # 404 error page
+├── elements.css            # Element styles
 ├── assets/
-│   ├── audio/             # Pliki dźwiękowe
-│   │   ├── animals/       # Dźwięki zwierząt
-│   │   ├── C418/          # Ścieżka dźwiękowa
-│   │   ├── Spore/         # Muzyka z gry Spore
+│   ├── audio/             # Audio files
+│   │   ├── animals/       # Animal sounds
+│   │   ├── C418/          # Soundtrack
+│   │   ├── Spore/         # Spore game music
 │   │   └── ...
-│   ├── css/               # Style CSS
-│   ├── cursors/           # Niestandardowe kursory
-│   ├── data/              # Dane JSON
+│   ├── css/               # CSS styles
+│   ├── cursors/           # Custom cursors
+│   ├── data/              # JSON data
 │   │   ├── downloads.json
 │   │   ├── reviews.json
 │   │   └── shrines.json
-│   ├── img/               # Obrazy i grafiki
-│   │   ├── gallery/       # Galeria zdjęć
-│   │   ├── phone/         # Ikony aplikacji na telefonie
-│   │   ├── shrine/        # Zdjęcia świątyń
-│   │   ├── music/         # Okładki albumów
-│   │   ├── reviews/       # Zdjęcia recenzji
-│   │   ├── blinkies/      # Retro animowane gify
-│   │   ├── stamps/        # Znaczki internetowe
-│   │   ├── themes/        # Tła tematyczne
-│   │   ├── toys/          # Interaktywne zabawki
-│   │   └── site_buttons/  # Przyciski strony
-│   ├── js/                # JavaScript
-│   │   ├── app.js         # Główna aplikacja
-│   │   └── gate.js        # Script bramki
-│   └── video/             # Pliki wideo
-└── prettier.json          # Konfiguracja formatteru
+│   ├── img/               # Images and graphics
+│   │   ├── gallery/       # Photo gallery
+│   │   ├── phone/         # App icons
+│   │   ├── shrine/        # Shrine images
+│   │   ├── music/         # Album covers
+│   │   ├── reviews/       # Review images
+│   │   ├── blinkies/      # Retro animated gifs
+│   │   ├── stamps/        # Web badges
+│   │   ├── themes/        # Theme backgrounds
+│   │   ├── toys/          # Interactive toys
+│   │   └── site_buttons/  # Site buttons
+│   ├── js/                # JavaScript files
+│   │   ├── app.js         # Main application
+│   │   └── gate.js        # Gate script
+│   └── video/             # Video files
+└── prettier.json          # Prettier configuration
 ```
 
-## Funkcje
+## Features
 
-- 🎨 Retro design inspirowany wczesnym internetem
-- 🎵 Kolekcja muzyki i dźwięków
-- 📸 Galeria zdjęć
-- ⭐ Świątynie (shrines) dla ulubionych postaci
-- 📝 Recenzje filmów i gier
-- 🧩 Interaktywne zabawki i elementy
-- 📱 Symulacja interfejsu telefonu
-- 🎮 Niestandardowe kursory myszy
+- 🎨 Retro design inspired by the early web
+- 🎵 Music and sound collection
+- 📸 Photo gallery
+- ⭐ Shrines for favorite characters
+- 📝 Movie and game reviews
+- 🧩 Interactive toys and elements
+- 📱 Phone interface simulation
+- 🎮 Custom mouse cursors
 
-## Szybki start
+## Quick Start
 
-Aby uruchomić projekt lokalnie:
+To run the project locally:
 
-1. Sklonuj repozytorium:
+1. Clone the repository:
 ```bash
 git clone https://github.com/xtosutosu/tosutosu.jump.git
 cd tosutosu_nekoweb
 ```
 
-2. Otwórz `index.html` w przeglądarce lub użyj lokalnego serwera:
+2. Open `index.html` in your browser or use a local server:
 ```bash
-# Jeśli masz Python 3
+# If you have Python 3
 python -m http.server 8000
 
-# Jeśli masz Node.js
+# If you have Node.js
 npx http-server
 ```
 
-3. Otwórz http://localhost:8000 (lub odpowiedni port)
+3. Open http://localhost:8000 (or the appropriate port)
 
-## Technologie
+## Technologies
 
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
-- JSON (do przechowywania danych)
+- JSON (for data storage)
 
-## Autor
+## Author
 
 **tosutosu** - [GitHub](https://github.com/xtosutosu)
 
-## Licencja
+## License
 
-Projekt jest dostępny publicznie. Czuj się wolny, aby czerpać inspirację!
+This project is publicly available. Feel free to draw inspiration from it!
 
 ---
 
-⭐ Jeśli lubisz ten projekt, daj gwiazdkę na GitHubie!
+⭐ If you like this project, please star it on GitHub!
