@@ -393,6 +393,7 @@
 	
 	  { id: "music",      name: "Music",      icon: "/assets/img/phone/Apple-Music.png",  group: "home" },
 	  { id: "reviews",    name: "Reviews",    icon: "/assets/img/phone/Apple-TV.png",     group: "home" },
+	  { id: "poetry",     name: "Poetry",     icon: "/assets/img/phone/Notes.png",        group: "home" },
 	  { id: "consoles",   name: "Consoles",   icon: "/assets/img/phone/Consoles.png",     group: "home" },
 	
 	  { id: "toys",       name: "Toys",       icon: "/assets/img/phone/Toys.png",         group: "home" },
@@ -809,6 +810,36 @@
             </div>
         </div>
       `,
+
+            poetry: () => `
+            <div style="position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; font-size: 11px;">
+              <div style="width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden;">
+                <div style="padding: 8px 10px; background: #000080; color: #fff; border-bottom: 1px solid #c0c0c0; letter-spacing: 1px;">
+                  POETRY
+                </div>
+                <div id="poetryList" style="flex: 1; min-height: 0; overflow-y: auto;"></div>
+              </div>
+
+              <div id="poetryViewer" style="display: none; position: absolute; inset: 0; z-index: 80; width: 100%; height: 100%; flex-direction: column; overflow: hidden; background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace;">
+                <div class="appTopbar poetryViewerTopbar" style="background: #000080; color: #fff; border-bottom: 1px solid #c0c0c0;">
+                  <div class="navLeft">
+                    <button class="backBtn" id="poetryBack" type="button">Back</button>
+                  </div>
+
+                  <div class="appTitle" id="poetryViewerTitle">Poetry</div>
+
+                  <div class="navRight"></div>
+                </div>
+
+                <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 12px 12px 44px; box-sizing: border-box;">
+                  <div id="poetryFolder" style="font-size: 11px; color: #aaa; margin-bottom: 8px;"></div>
+                  <div id="poetryDate" style="font-size: 11px; color: #aaa; margin-bottom: 10px;"></div>
+                  <h1 id="poetryTitle" style="margin: 0 0 12px; font-size: 16px; color: #0f0; border-bottom: 1px solid #0f0; padding-bottom: 6px;"></h1>
+                  <div id="poetryContent" style="white-space: pre-wrap; line-height: 1.5; font-size: 12px;"></div>
+                </div>
+              </div>
+            </div>
+            `,
 
       camera: () => `
         <div class="iosCameraApp">
@@ -2739,6 +2770,7 @@ function silenceWebampAudio_(webamp){
     const DOWNLOADS_URL = new URL("assets/data/downloads.json", window.location.href).toString();
     const SHRINES_URL = new URL("assets/data/shrines.json", window.location.href).toString();
     const REVIEWS_URL = new URL("assets/data/reviews.json", window.location.href).toString();
+    const POETRY_URL = new URL("assets/data/poetry.json", window.location.href).toString();
 
     const SAFARI_FILTER_KEY = "tosuOS_safari_filter";
     const SAFARI_DB = [
@@ -3745,6 +3777,194 @@ function wireAppHooks(appId){
         setActiveFilter(activeFilter);
         renderSafari();
       }
+
+    if (appId === "poetry"){
+      const list = document.getElementById("poetryList");
+      const viewer = document.getElementById("poetryViewer");
+      const backBtn = document.getElementById("poetryBack");
+      const poetryViewerTitle = document.getElementById("poetryViewerTitle");
+      const poetryFolder = document.getElementById("poetryFolder");
+      const poetryDate = document.getElementById("poetryDate");
+      const poetryTitle = document.getElementById("poetryTitle");
+      const poetryContent = document.getElementById("poetryContent");
+
+      let poetryData = [];
+      let currentFolder = null;
+
+      function escapeText(text){
+        return String(text ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function formatPoetryDate(value){
+        if (!value) return "";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return String(value);
+        return date.toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      function folderLabel(item){
+        return item?.name || item?.folder || "Folder";
+      }
+
+      function poemRow(poem, nested){
+        const row = document.createElement("button");
+        row.type = "button";
+        row.style.cssText = [
+          "display:flex",
+          "align-items:center",
+          "gap:8px",
+          "width:100%",
+          "padding:8px 10px",
+          "border:0",
+          "border-bottom:1px solid #303030",
+          "background:#000",
+          "color:#0f0",
+          "text-align:left",
+          "font:inherit",
+          "cursor:pointer",
+        ].join(";");
+        row.onmouseenter = () => row.style.background = "#000080";
+        row.onmouseleave = () => row.style.background = "#000";
+        row.innerHTML = `${nested ? "<span style=\"opacity:.7\">└─</span>" : "<span>📄</span>"}<span>${escapeText(poem.title || "Untitled")}</span>`;
+        row.addEventListener("click", () => showPoem(poem, currentFolder));
+        return row;
+      }
+
+      function showPoem(poem, folder){
+        if (!viewer) return;
+        viewer.style.display = "flex";
+        poetryViewerTitle.textContent = poem.title || "Poetry";
+        poetryFolder.textContent = folder ? `Folder: ${folderLabel(folder)}` : "";
+        poetryFolder.style.display = folder ? "block" : "none";
+        poetryDate.textContent = poem.date ? `Written: ${formatPoetryDate(poem.date)}` : "Written: —";
+        poetryTitle.textContent = poem.title || "Untitled";
+        if (poem.contentHtml){
+          poetryContent.style.whiteSpace = "normal";
+          poetryContent.innerHTML = poem.contentHtml;
+        } else {
+          poetryContent.style.whiteSpace = "pre-wrap";
+          poetryContent.textContent = poem.content || poem.body || "";
+        }
+      }
+
+      function renderRoot(){
+        currentFolder = null;
+        if (viewer) viewer.style.display = "none";
+        if (!list) return;
+        list.innerHTML = "";
+
+        if (!poetryData.length){
+          list.innerHTML = `<div style="padding:12px; color:#ff6666;">No poetry found.</div>`;
+          return;
+        }
+
+        poetryData.forEach((entry) => {
+          if (entry && entry.type === "folder"){
+            const folderRow = document.createElement("button");
+            folderRow.type = "button";
+            folderRow.style.cssText = [
+              "display:flex",
+              "align-items:center",
+              "gap:8px",
+              "width:100%",
+              "padding:9px 10px",
+              "border:0",
+              "border-bottom:1px solid #303030",
+              "background:#001100",
+              "color:#0f0",
+              "text-align:left",
+              "font:inherit",
+              "cursor:pointer",
+            ].join(";");
+            folderRow.onmouseenter = () => folderRow.style.background = "#000080";
+            folderRow.onmouseleave = () => folderRow.style.background = "#001100";
+            folderRow.innerHTML = `<span>📁</span><span>${escapeText(folderLabel(entry))}</span><span style="margin-left:auto; color:#aaa;">${Array.isArray(entry.poems) ? entry.poems.length : 0}</span>`;
+            folderRow.addEventListener("click", () => renderFolder(entry));
+            list.appendChild(folderRow);
+            return;
+          }
+
+          list.appendChild(poemRow(entry, false));
+        });
+      }
+
+      function renderFolder(folder){
+        currentFolder = folder;
+        if (viewer) viewer.style.display = "none";
+        if (!list) return;
+        list.innerHTML = "";
+
+        const backRow = document.createElement("button");
+        backRow.type = "button";
+        backRow.style.cssText = [
+          "display:flex",
+          "align-items:center",
+          "gap:8px",
+          "width:100%",
+          "padding:9px 10px",
+          "border:0",
+          "border-bottom:1px solid #303030",
+          "background:#000080",
+          "color:#0f0",
+          "text-align:left",
+          "font:inherit",
+          "cursor:pointer",
+        ].join(";");
+        backRow.innerHTML = `<span>↩</span><span>..</span>`;
+        backRow.addEventListener("click", renderRoot);
+        list.appendChild(backRow);
+
+        const header = document.createElement("div");
+        header.style.cssText = "padding:8px 10px; border-bottom:1px solid #303030; background:#001100; color:#0f0; font-weight:bold;";
+        header.textContent = folderLabel(folder);
+        list.appendChild(header);
+
+        const poems = Array.isArray(folder.poems) ? folder.poems : [];
+        if (!poems.length){
+          const empty = document.createElement("div");
+          empty.style.cssText = "padding:12px; color:#aaa;";
+          empty.textContent = "No poems in this folder.";
+          list.appendChild(empty);
+          return;
+        }
+
+        poems.forEach((poem) => {
+          list.appendChild(poemRow(poem, true));
+        });
+      }
+
+      backBtn?.addEventListener("click", () => {
+        if (currentFolder){
+          renderFolder(currentFolder);
+        } else {
+          renderRoot();
+        }
+      });
+
+      async function loadPoetry(){
+        try {
+          const res = await fetch(POETRY_URL, { cache: "no-store" });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          poetryData = await res.json();
+          if (!Array.isArray(poetryData)) throw new Error("Poetry data is not an array");
+          renderRoot();
+        } catch (err){
+          console.warn("[poetry] failed to load JSON", err);
+          if (list) list.innerHTML = `<div style="padding:12px; color:#ff6666;">Error loading poetry: ${escapeText(err.message)}</div>`;
+        }
+      }
+
+      loadPoetry();
+    }
 
 	  // CAMERA
 	  if (appId === "camera"){
