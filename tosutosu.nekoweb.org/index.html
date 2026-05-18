@@ -1,316 +1,508 @@
 <!doctype html>
 <html lang="pl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
-  <title>tosuOS • (●'◡'●)</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<title>tosuOS • (●'◡'●)</title>
 
-  <!-- Icons for the Apple player wheel -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/cursors/cursor-style.css">
+		<!-- Icons for the Apple player wheel -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="assets/cursors/cursor-style.css" />
 
-  <!-- Extracted into separate files -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <script src="assets/js/gate.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
-</head>
+		<!-- Extracted into separate files -->
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<script src="assets/js/gate.js" defer></script>
+		<script src="assets/js/app.js" defer></script>
+	</head>
 
-<!-- HTML BELOW -->
+	<!-- HTML BELOW -->
 
-<body>
-  <!-- ENTER GATE (always) -->
-  <div id="preEnterGate" role="dialog" aria-modal="true" aria-labelledby="preEnterGateTitle">
-    <div class="gateCard">
-      <h2 id="preEnterGateTitle" class="gateTitle">Read Before Entering</h2>
-      <p class="gateMsg">This website may contain strong language and other sensitive jokes but does not and will not contain any real mature materials. You have been warned.</p>
-      <p class="gateMsg">Designed with 1920x1080 on Firefox in mind. On mobile, you might not get the full experience.</p>
-      <p class="gateMsg">Please sign my guestbook once you enter! c:</p>
+	<body>
+		<!-- ENTER GATE (always) -->
+		<div
+			id="preEnterGate"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="preEnterGateTitle"
+		>
+			<div class="gateCard">
+				<h2 id="preEnterGateTitle" class="gateTitle">
+					Read Before Entering
+				</h2>
+				<p class="gateMsg">
+					This website may contain strong language and other sensitive
+					jokes but does not and will not contain any real mature
+					materials. You have been warned.
+				</p>
+				<p class="gateMsg">
+					Designed with 1080p on Firefox in mind. I recommend visiting
+					it via a desktop PC. On mobile, you might not get the full
+					experience.
+				</p>
+				<p class="gateMsg">Please sign my guestbook once you enter!</p>
 
-      <div class="gateStatusRow" aria-live="polite">
-        <span id="preEnterGateStatus" class="gateStatus">Please wait while the assets are loading...</span>
-      </div>
+				<div class="gateStatusRow" aria-live="polite">
+					<span id="preEnterGateStatus" class="gateStatus">
+						Please wait while the assets are loading...
+					</span>
+				</div>
 
-      <button id="preEnterGateBtn" class="gateBtn" type="button" disabled>Enter</button>
+				<button
+					id="preEnterGateBtn"
+					class="gateBtn"
+					type="button"
+					disabled
+				>
+					Enter
+				</button>
 
-      <div class="gateCounterWrap" aria-label="Visitor counter">
-        <img
-          class="gateCounterImg"
-          src="https://count.getloli.com/get/@kgnet-site-oficial-2026?theme=rule34"
-          alt="Visitor counter"
-          loading="lazy"
-          referrerpolicy="no-referrer"
-        />
-      </div>
-    </div>
-  </div>
-
-  <!-- SITE BACKGROUND (tiling)  -->
-  <!-- Site background layer (image OR video; driven by app.js theme mapping) -->
-  <div id="siteBg" aria-hidden="true">
-    <video id="siteBgVideo" class="siteBgVideo" autoplay muted loop playsinline preload="auto"></video>
-    <div id="siteBgImg" class="siteBgImg"></div>
-  </div>
-
-  <!-- iOS 6 Modal Overlay -->
-  <div class="ios6-alert-overlay" id="ios6AlertOverlay">
-    <div class="ios6-alert-box">
-      <div class="ios6-alert-body">
-        <div class="ios6-alert-title" id="ios6AlertTitle">Alert</div>
-        <div class="ios6-alert-msg" id="ios6AlertMsg">Are you sure?</div>
-      </div>
-      <div class="ios6-alert-btns">
-        <button class="ios6-alert-btn" id="ios6AlertCancel">Cancel</button>
-        <button class="ios6-alert-btn" id="ios6AlertOk">OK</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- WebNeko -->
-  <h1 id="nl">
-    <a class="visuallyHidden" href="https://webneko.net" rel="noreferrer">Neko</a>
-  </h1>
-
-  <!-- TOY: Miku -->
-	<img
-	  id="mikuToy"
-	  src="/assets/img/toys/miku.gif"
-	  alt="Miku"
-	  aria-hidden="true"
-	/>
-  <!-- TOY: Cinna -->
-	<img
-	  id="cinnaToy"
-	  src="/assets/img/toys/cinnafloat.gif"
-	  alt="Cinna"
-	  aria-hidden="true"
-	/>
-
-  <!-- TOY: Konata -->
-	<img
-	  id="konataToy"
-	  src="/assets/img/toys/konata.gif"
-	  alt="Konata"
-	  aria-hidden="true"
-	/>
-
-  <div
-	id="webamp-container"
-	style="position:fixed; right:0px; bottom:0px; width:0px; height:0px; z-index:99999;"
-  ></div>
-
-  <main class="shell">
-
-    <!-- LEFT -->
-    <section class="leftcol">
-
-	<div class="win" id="about98Card">
-	  <div class="titlebar">
-	    <div class="wtitle">ABOUT <small>me.exe</small></div>
-	    <div class="xbtn" aria-hidden="true">×</div>
-	  </div>
-
-	  <div class="body">
-	    <div id="about98Win" class="win98Host">
-	      <iframe
-	        id="about98Frame"
-	        title="About (Win98)"
-	        scrolling="no"
-	        tabindex="-1"
-	      ></iframe>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="win" id="stamps98Card">
-	  <div class="titlebar">
-	    <div class="wtitle">STAMPS <small>99×56</small></div>
-	    <div class="xbtn" aria-hidden="true">×</div>
-	  </div>
-
-	  <div class="body">
-	    <div id="stamps98Win" class="win98Host">
-	      <iframe
-	        id="stamps98Frame"
-	        title="Stamps 99×56 (Win98)"
-	        scrolling="no"
-	        tabindex="-1"
-	      ></iframe>
-
-	    </div>
-	  </div>
-	</div>
-
-		<div class="win" id="buttons98Card">
-		  <div class="titlebar">
-		    <div class="wtitle">BUTTONS <small>88×31</small></div>
-		    <div class="xbtn" aria-hidden="true">×</div>
-		  </div>
-
-		  <div class="body">
-		    <div id="buttons98Win" class="win98Host">
-		      <iframe
-		        id="buttons98Frame"
-		        title="Buttons 88×31 (Win98)"
-		        scrolling="no"
-		        tabindex="-1"
-		      ></iframe>
-
-		      <div class="buttonsRow" id="buttonsFallback" style="display:none; margin-top:10px;">
-		        <a class="button88" href="#" target="_blank" rel="noreferrer"><img src="assets/img/site_buttons/www.gif" alt="WWW" loading="lazy"></a>
-		        <a class="button88" href="#" target="_blank" rel="noreferrer"><img src="assets/img/site_buttons/bestvwmonitor.gif" alt="Best VW Monitor" loading="lazy"></a>
-		        <a class="button88" href="#" target="_blank" rel="noreferrer"><img src="assets/img/site_buttons/css.gif" alt="CSS" loading="lazy"></a>
-		        <a class="button88" href="#" target="_blank" rel="noreferrer"><img src="assets/img/site_buttons/internetarchive.gif" alt="Internet Archive" loading="lazy"></a>
-		        <a class="button88" href="#" target="_blank" rel="noreferrer"><img src="assets/img/site_buttons/mobile.gif" alt="Mobile" loading="lazy"></a>
-		        <a class="button88" href="https://nekoweb.org" target="_blank" rel="noreferrer"><img src="assets/img/site_buttons/nekoweb.gif" alt="Nekoweb" loading="lazy"></a>
-		      </div>
-		    </div>
-		  </div>
+				<div class="gateCounterWrap" aria-label="Visitor counter">
+					<img
+						class="gateCounterImg"
+						src="https://count.getloli.com/get/@kgnet-site-oficial-2026?theme=rule34"
+						alt="Visitor counter"
+						loading="lazy"
+						referrerpolicy="no-referrer"
+					/>
+				</div>
+			</div>
 		</div>
 
-	  <div class="nkStatsCard">
-	    <div class="nkStatsGrid">
-	      <div class="nkStat" id="created">—</div>
-	      <div class="nkStat" id="updated">—</div>
-	      <div class="nkStat" id="visitors">—</div>
-	      <div class="nkStat" id="followers">—</div>
-	    </div>
-  	  </div>
+		<!-- SITE BACKGROUND (tiling)  -->
+		<!-- Site background layer (image OR video; driven by app.js theme mapping) -->
+		<div id="siteBg" aria-hidden="true">
+			<video
+				id="siteBgVideo"
+				class="siteBgVideo"
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="auto"
+			></video>
+			<div id="siteBgImg" class="siteBgImg"></div>
+		</div>
 
-	</section>
-
-    <!-- CENTER -->
-    <section class="centercol">
-
-      <div class="workspace" aria-label="Center workspace">
-		<section class="phone" aria-label="Phone screen">
-			<div class="phoneHardware" aria-hidden="true">
-			  <div class="hwTop">
-			    <div class="hwCamera"></div>
-			    <div class="hwEarpiece"></div>
-			  </div>
-
-			  <div class="hwBottom">
-			    <div class="hwHomeBtn"></div>
-			  </div>
-
-			  <div class="hwBottomEdge">
-			    <div class="hwGrille"></div>
-			    <div class="hwPort"></div>
-			    <div class="hwGrille"></div>
-			  </div>
+		<!-- iOS 6 Modal Overlay -->
+		<div class="ios6-alert-overlay" id="ios6AlertOverlay">
+			<div class="ios6-alert-box">
+				<div class="ios6-alert-body">
+					<div class="ios6-alert-title" id="ios6AlertTitle">
+						Alert
+					</div>
+					<div class="ios6-alert-msg" id="ios6AlertMsg">
+						Are you sure?
+					</div>
+				</div>
+				<div class="ios6-alert-btns">
+					<button class="ios6-alert-btn" id="ios6AlertCancel">
+						Cancel
+					</button>
+					<button class="ios6-alert-btn" id="ios6AlertOk">OK</button>
+				</div>
 			</div>
-		  <!-- HITBOX of Home Button (above phoneHardware) -->
-		  <button
-		    class="hwHomeHit"
-		    id="hwHomeHit"
-		    type="button"
-		    aria-label="Home"
-		  ></button>
+		</div>
 
-		  <!-- Phone Inner -->
-			<div class="phoneInner">
-			  <!-- wallpaper -->
-			  <div class="wallpaper" aria-hidden="true"></div>
+		<!-- WebNeko -->
+		<h1 id="nl">
+			<a
+				class="visuallyHidden"
+				href="https://webneko.net"
+				rel="noreferrer"
+			>
+				Neko
+			</a>
+		</h1>
 
-			  <!-- STATUS BAR -->
-			  <header class="status ios6" aria-label="Status bar">
-			    <div class="sbLeft">
-			      <span class="sbIcon sbWifi" aria-hidden="true"></span>
-			    </div>
+		<!-- TOY: Miku -->
+		<img
+			id="mikuToy"
+			src="assets/img/toys/miku.gif"
+			alt="Miku"
+			aria-hidden="true"
+		/>
+		<!-- TOY: Cinna -->
+		<img
+			id="cinnaToy"
+			src="assets/img/toys/cinnafloat.gif"
+			alt="Cinna"
+			aria-hidden="true"
+		/>
 
-			    <div class="sbCenter">
-			      <span class="sbTime" id="sbTime">00:00</span>
-			    </div>
+		<!-- TOY: Konata -->
+		<img
+			id="konataToy"
+			src="assets/img/toys/konata.gif"
+			alt="Konata"
+			aria-hidden="true"
+		/>
 
-			    <div class="sbRight">
-			      <span class="sbBatteryPct" id="sbBatteryPct">--%</span>
-			      <span class="sbBattery" aria-hidden="true">
-			        <span class="sbBatteryFill" id="sbBatteryFill" style="width:70%"></span>
-			      </span>
-			    </div>
-			  </header>
+		<div
+			id="webamp-container"
+			style="position:fixed; right:0px; bottom:0px; width:0px; height:0px; z-index:99999;"
+		></div>
 
-			  <!-- “APP CANVAS” -->
-			  <main class="screen" id="screen" role="application" aria-label="Phone screen"></main>
-			</div>
-		</section>
-      </div>
-    </section>
+		<main class="shell">
+			<!-- LEFT -->
+			<section class="leftcol">
+				<div class="win" id="about98Card">
+					<div class="titlebar">
+						<div class="wtitle">
+							ABOUT
+							<small>me.exe</small>
+						</div>
+						<div class="xbtn" aria-hidden="true">×</div>
+					</div>
 
-	<!-- RIGHT -->
-	<aside class="rightcol">
+					<div class="body">
+						<div id="about98Win" class="win98Host">
+							<iframe
+								id="about98Frame"
+								title="About (Win98)"
+								scrolling="no"
+								tabindex="-1"
+							></iframe>
+						</div>
+					</div>
+				</div>
 
-	  <div id="statuscafe">
-		<div id="statuscafe-username"></div>
-		<div id="statuscafe-content"></div>
-	    </div>
-	  <script src="https://status.cafe/current-status.js?name=tosutosu" defer></script>
+				<div class="win" id="stamps98Card">
+					<div class="titlebar">
+						<div class="wtitle">
+							STAMPS
+							<small>99×56</small>
+						</div>
+						<div class="xbtn" aria-hidden="true">×</div>
+					</div>
 
-      <!-- LAST.FM (custom pill widget) -->
-      <div id="lastfmPill" aria-label="Last.fm">
-        <a id="lastfmLink" href="https://www.last.fm/user/tosutosu" target="_blank" rel="noopener">
-		  <div id="lastfmInner">
-			<div class="lfmSkeleton">Accessing Last.fm…</div>
-	      </div>
-        </a>
-      </div>
+					<div class="body">
+						<div id="stamps98Win" class="win98Host">
+							<iframe
+								id="stamps98Frame"
+								title="Stamps 99×56 (Win98)"
+								scrolling="no"
+								tabindex="-1"
+							></iframe>
+						</div>
+					</div>
+				</div>
 
-      <!-- APPLE PLAYER -->
-      <div class="winReveal isHidden" id="playerWin" aria-label="Player mini">
-        <div class="player">
-          <div class="window">
-            <div class="window-body">
-              <div class="flex">
-                <div class="wheel">
-                  <div class="wheelcontrols">
-                    <button class="fas fa-plus" type="button" title="Volume up" onclick="volumeUp()" style="padding-top:4px; padding-bottom:0;"></button>
-                  </div>
+				<div class="win" id="buttons98Card">
+					<div class="titlebar">
+						<div class="wtitle">
+							BUTTONS
+							<small>88×31</small>
+						</div>
+						<div class="xbtn" aria-hidden="true">×</div>
+					</div>
 
-                  <table class="wheelcontrols" aria-hidden="true">
-                    <tr>
-                      <th>
-                        <button class="fas fa-backward" type="button" title="Prev" onclick="prevTrack()"></button>
-                      </th>
-                      <th class="innerwheel">
-                        <button class="playpause-track fas fa-play" type="button" title="Play/Pause" onclick="playpauseTrack()"></button>
-                      </th>
-                      <th>
-                        <button class="fas fa-forward" type="button" title="Next" onclick="nextTrack()"></button>
-                      </th>
-                    </tr>
-                  </table>
+					<div class="body">
+						<div id="buttons98Win" class="win98Host">
+							<iframe
+								id="buttons98Frame"
+								title="Buttons 88×31 (Win98)"
+								scrolling="no"
+								tabindex="-1"
+							></iframe>
 
-                  <div class="wheelcontrols" style="padding:0;">
-                    <button class="fas fa-minus" type="button" title="Volume down" onclick="volumeDown()"></button>
-                  </div>
-                </div>
+							<div
+								class="buttonsRow"
+								id="buttonsFallback"
+								style="display:none; margin-top:10px;"
+							>
+								<a
+									class="button88"
+									href="#"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<img
+										src="assets/img/site_buttons/www.gif"
+										alt="WWW"
+										loading="lazy"
+									/>
+								</a>
+								<a
+									class="button88"
+									href="#"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<img
+										src="assets/img/site_buttons/bestvwmonitor.gif"
+										alt="Best VW Monitor"
+										loading="lazy"
+									/>
+								</a>
+								<a
+									class="button88"
+									href="#"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<img
+										src="assets/img/site_buttons/css.gif"
+										alt="CSS"
+										loading="lazy"
+									/>
+								</a>
+								<a
+									class="button88"
+									href="#"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<img
+										src="assets/img/site_buttons/internetarchive.gif"
+										alt="Internet Archive"
+										loading="lazy"
+									/>
+								</a>
+								<a
+									class="button88"
+									href="#"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<img
+										src="assets/img/site_buttons/mobile.gif"
+										alt="Mobile"
+										loading="lazy"
+									/>
+								</a>
+								<a
+									class="button88"
+									href="https://nekoweb.org"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<img
+										src="assets/img/site_buttons/nekoweb.gif"
+										alt="Nekoweb"
+										loading="lazy"
+									/>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                <div id="musicplayer">
-                  <div class="flex">
-                    <marquee scrollamount="4" class="songtitle">—</marquee>
-                  </div>
+				<div class="nkStatsCard">
+					<div class="nkStatsGrid">
+						<div class="nkStat" id="created">—</div>
+						<div class="nkStat" id="updated">—</div>
+						<div class="nkStat" id="visitors">—</div>
+						<div class="nkStat" id="followers">—</div>
+					</div>
+				</div>
+			</section>
 
-                  <div class="seeking">
-                    <div class="current-time">0:00</div>
-                    <input type="range" min="0" max="100" value="0" class="seek_slider" onchange="seekTo()">
-                    <div class="total-duration">0:00</div>
-                  </div>
-                </div>
+			<!-- CENTER -->
+			<section class="centercol">
+				<div class="workspace" aria-label="Center workspace">
+					<section class="phone" aria-label="Phone screen">
+						<div class="phoneHardware" aria-hidden="true">
+							<div class="hwTop">
+								<div class="hwCamera"></div>
+								<div class="hwEarpiece"></div>
+							</div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+							<div class="hwBottom">
+								<div class="hwHomeBtn"></div>
+							</div>
 
-	</aside>
+							<div class="hwBottomEdge">
+								<div class="hwGrille"></div>
+								<div class="hwPort"></div>
+								<div class="hwGrille"></div>
+							</div>
+						</div>
+						<!-- HITBOX of Home Button (above phoneHardware) -->
+						<button
+							class="hwHomeHit"
+							id="hwHomeHit"
+							type="button"
+							aria-label="Home"
+						></button>
 
+						<!-- Phone Inner -->
+						<div class="phoneInner">
+							<!-- wallpaper -->
+							<div class="wallpaper" aria-hidden="true"></div>
 
-  </main>
+							<!-- STATUS BAR -->
+							<header class="status ios6" aria-label="Status bar">
+								<div class="sbLeft">
+									<span
+										class="sbIcon sbWifi"
+										aria-hidden="true"
+									></span>
+								</div>
 
-  <!-- AUDIO LOAD -->
-  <audio id="audioSide" preload="metadata"></audio>
+								<div class="sbCenter">
+									<span class="sbTime" id="sbTime">
+										00:00
+									</span>
+								</div>
 
-</body>
+								<div class="sbRight">
+									<span
+										class="sbBatteryPct"
+										id="sbBatteryPct"
+									>
+										--%
+									</span>
+									<span class="sbBattery" aria-hidden="true">
+										<span
+											class="sbBatteryFill"
+											id="sbBatteryFill"
+											style="width:70%"
+										></span>
+									</span>
+								</div>
+							</header>
+
+							<!-- “APP CANVAS” -->
+							<main
+								class="screen"
+								id="screen"
+								role="application"
+								aria-label="Phone screen"
+							></main>
+						</div>
+					</section>
+				</div>
+			</section>
+
+			<!-- RIGHT -->
+			<aside class="rightcol">
+				<div id="statuscafe">
+					<div id="statuscafe-username"></div>
+					<div id="statuscafe-content"></div>
+				</div>
+				<script
+					src="https://status.cafe/current-status.js?name=tosutosu"
+					defer
+				></script>
+
+				<!-- LAST.FM (custom pill widget) -->
+				<div id="lastfmPill" aria-label="Last.fm">
+					<a
+						id="lastfmLink"
+						href="https://www.last.fm/user/tosutosu"
+						target="_blank"
+						rel="noopener"
+					>
+						<div id="lastfmInner">
+							<div class="lfmSkeleton">Accessing Last.fm…</div>
+						</div>
+					</a>
+				</div>
+
+				<!-- APPLE PLAYER -->
+				<div
+					class="winReveal isHidden"
+					id="playerWin"
+					aria-label="Player mini"
+				>
+					<div class="player">
+						<div class="window">
+							<div class="window-body">
+								<div class="flex">
+									<div class="wheel">
+										<div class="wheelcontrols">
+											<button
+												class="fas fa-plus"
+												type="button"
+												title="Volume up"
+												onclick="volumeUp()"
+												style="padding-top:4px; padding-bottom:0;"
+											></button>
+										</div>
+
+										<table
+											class="wheelcontrols"
+											aria-hidden="true"
+										>
+											<tr>
+												<th>
+													<button
+														class="fas fa-backward"
+														type="button"
+														title="Prev"
+														onclick="prevTrack()"
+													></button>
+												</th>
+												<th class="innerwheel">
+													<button
+														class="playpause-track fas fa-play"
+														type="button"
+														title="Play/Pause"
+														onclick="playpauseTrack()"
+													></button>
+												</th>
+												<th>
+													<button
+														class="fas fa-forward"
+														type="button"
+														title="Next"
+														onclick="nextTrack()"
+													></button>
+												</th>
+											</tr>
+										</table>
+
+										<div
+											class="wheelcontrols"
+											style="padding:0;"
+										>
+											<button
+												class="fas fa-minus"
+												type="button"
+												title="Volume down"
+												onclick="volumeDown()"
+											></button>
+										</div>
+									</div>
+
+									<div id="musicplayer">
+										<div class="flex">
+											<marquee
+												scrollamount="4"
+												class="songtitle"
+											>
+												—
+											</marquee>
+										</div>
+
+										<div class="seeking">
+											<div class="current-time">0:00</div>
+											<input
+												type="range"
+												min="0"
+												max="100"
+												value="0"
+												class="seek_slider"
+												onchange="seekTo()"
+											/>
+											<div class="total-duration">
+												0:00
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</main>
+
+		<!-- AUDIO LOAD -->
+		<audio id="audioSide" preload="metadata"></audio>
+	</body>
 </html>

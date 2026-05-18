@@ -236,7 +236,7 @@ body{
 
 /* Image layer (default) */
 #siteBg .siteBgImg{
-  background: url("/assets/img/themes/dsi-background.png") 0 0/auto repeat;
+  background: url("../img/themes/dsi-background.png") 0 0/auto repeat;
 }
 
 /* =========================
@@ -1563,7 +1563,7 @@ html[data-theme="milk"] .sRowValue{color:#8e8e93}
   background:
     linear-gradient(160deg,rgba(26,31,40,.35) 0%,rgba(11,14,18,.65) 60%,rgba(0,0,0,.85) 100%),
     radial-gradient(circle at 30% 20%,rgba(255,255,255,.08),transparent 40%),
-    url("/assets/img/john.png") center/cover no-repeat;
+    url("../img/john.png") center/cover no-repeat;
 }
 .iosCameraView::before{
   content:"";
@@ -2406,11 +2406,11 @@ html[data-theme="milk"] .sRowValue{color:#8e8e93}
 /* =========================
    CURSORS
    ========================= */
-html,body{cursor:url("/assets/cursors/auto.cur"),auto}
+html,body{cursor:url("../cursors/auto.cur"),auto}
 a,button,[role="button"],.navBtn,.btn,.appIcon,.callMiniBtn,.callMainBtn,input[type="range"]{
-  cursor:url("/assets/cursors/pointer.cur"),pointer
+  cursor:url("../cursors/pointer.cur"),pointer
 }
-input[type="text"],input[type="search"],textarea{cursor:url("/assets/cursors/text.cur"),text}
+input[type="text"],input[type="search"],textarea{cursor:url("../cursors/text.cur"),text}
 
 /* WebNeko layer */
 #nl{position:fixed;left:0;top:0;width:0;height:0;margin:0;padding:0;z-index:2147483647}
@@ -2523,8 +2523,13 @@ html,body{margin:0;padding:0;background:transparent !important;overflow:hidden}
 .window-body{padding:3px;margin:0}
 
 /* Kursor */
-html,body,a,button,input{ cursor: url("/assets/cursors/auto.cur"), auto; }
-a,button{ cursor: url("/assets/cursors/pointer.cur"), pointer; }
+html,body,a,button,input{ cursor: url("../cursors/auto.cur"), auto; }
+a,button{ cursor: url("../cursors/pointer.cur"), pointer; }
+
+/* Avoid misaligned custom cursor inside Win-style panels: use system cursor for generic panel areas,
+   but keep pointer for interactive elements. */
+.win, .win * { cursor: auto !important; }
+.win a, .win button, .win [role="button"] { cursor: pointer !important; }
 
 /* Placeholder for injected styles in template builds:
    ${styles}
